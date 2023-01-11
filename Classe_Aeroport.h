@@ -21,6 +21,7 @@ class Aeroport
 	    string Country_Code ;
 	
 	public :
+		int Get_ID_Position () { return ID_Position ; }
 		string Get_NameGlob () { return NameGlob ; }
 		string Get_NameEn () { return NameEn ; }
 		string Get_NameFr () { return NameFr ; }
@@ -118,6 +119,7 @@ int Charger_Liste_Aeroports ( string Nom_Fichier , vector<Aeroport> &A , vector<
 	   	p_Adr = Ajouter_Sans_Doublon ( p , P ) ;
         Ligne_Dissociee.pop_back () ;
 	   	A.push_back ( Aeroport ( p_Adr , Ligne_Dissociee ) ) ;
+	   	Liste_Positions[p_Adr].Affecter_Aeroport ( A.size() - 1 ) ;
 	   	//A[A.size()-1].Afficher_Tout () ;	cout << endl ;
 	   	
         Ligne_Dissociee.clear() ;

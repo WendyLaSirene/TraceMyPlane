@@ -4,23 +4,24 @@
 #include <sstream>
 using namespace std ;
 
-#include "Classe_Moment.h"
-#include "Classe_Position.h"
-vector<Moment> Liste_Moments ;
-vector<Position> Liste_Positions ;
-
 #include "Fonctions_Diverses.h"
 
+#include "Classe_Moment.h"
+vector<Moment> Liste_Moments ;
+#include "Classe_Position.h"
+vector<Position> Liste_Positions ;
+
+
 #include "Classe_Aeroport.h"
+vector<Aeroport> Liste_Aeroports ;
 #include "Classe_Vol.h"
+vector<Vol> Liste_Vols ;
 
 
 
 
 int main ( )
 {
-	vector<Aeroport> Liste_Aeroports ;
-	vector<Vol> Liste_Vols ;
 	
 	int i ;
 	int Nombre_Aeroports ;
@@ -32,12 +33,12 @@ int main ( )
 	
 	// Juste pour tester
 	
-	for ( i = 0 ; i < Liste_Moments.size () ; i ++ )
+	/*for ( i = 0 ; i < Liste_Moments.size () ; i ++ )
 	{
 		cout << &Liste_Moments[i] << "  " ;
 	    Liste_Moments[i].Afficher () ;
 	    cout << endl ;
-	}
+	}*/
 	
 	/*for ( i = 0 ; i < Liste_Positions.size () ; i ++ )
 	{
@@ -57,8 +58,9 @@ int main ( )
 	    cout << "Saisie invalide !" << endl ;
 	else
 	    Liste_Aeroports[Choix-1].Afficher_Tout() ;
+	cout << Liste_Aeroports[Choix-1].Get_ID_Position() << endl ;
 	    
-	/*Nombre_Vols = Liste_Vols.size() ;
+	Nombre_Vols = Liste_Vols.size() ;
 	cout << endl ;
 	cout << endl ;
 	for ( i = 0 ; i < Nombre_Vols ; i ++ )
@@ -68,7 +70,10 @@ int main ( )
 	if ( Choix <= 0 || Choix > Nombre_Vols )
 	    cout << "Saisie invalide !" << endl ;
 	else
-	    Liste_Vols[Choix-1].Afficher_Tout() ;*/
+	    Liste_Vols[Choix-1].Afficher_Tout() ;
+	    
+    /*for ( i = 0 ; i < Liste_Vols[Choix-1].Get_Nombre_Etapes() ; i ++ )
+        cout << Liste_Vols[Choix-1].Get_ID_Positions_Vol(i) << endl ;*/
 	
     return 0 ;
 }

@@ -25,6 +25,8 @@ class Vol
 		void Set_ID ( int i ) { ID = i ; }
 		void Add_Moment_Position ( int m , int p ) { ID_Moments_Vol.push_back ( m ) ; ID_Positions_Vol.push_back ( p ) ; }
 		
+		int Get_ID_Positions_Vol ( int n ) { return ID_Positions_Vol[n] ; }
+		int Get_ID_Moments_Vol ( int n ) { return ID_Moments_Vol[n] ; }
 		string Get_Nom () { return Nom ; }
 		int Get_Nombre_Etapes () { return ID_Moments_Vol.size() ; }
 		
@@ -34,6 +36,8 @@ class Vol
 		    Liste_Moments[ID_Moments_Vol[i]].Afficher() ;
 			cout << " / Coordonnees : " ;
 			Liste_Positions[ID_Positions_Vol[i]].Afficher() ;
+			if ( Liste_Positions[ID_Positions_Vol[i]].Get_ID_Aeroport() >= 0 )
+			    cout << endl << Liste_Aeroports[ID_Positions_Vol[i]].Get_NameGlob() ;
 		}
 		
 		void Afficher_Tout ()
