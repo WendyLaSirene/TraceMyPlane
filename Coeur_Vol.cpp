@@ -4,10 +4,13 @@
 #include <sstream>
 using namespace std ;
 
-#include "Fonctions_Diverses.h"
-
 #include "Classe_Moment.h"
 #include "Classe_Position.h"
+vector<Moment> Liste_Moments ;
+vector<Position> Liste_Positions ;
+
+#include "Fonctions_Diverses.h"
+
 #include "Classe_Aeroport.h"
 #include "Classe_Vol.h"
 
@@ -18,8 +21,6 @@ int main ( )
 {
 	vector<Aeroport> Liste_Aeroports ;
 	vector<Vol> Liste_Vols ;
-	vector<Moment> Liste_Moments ;
-	vector<Position> Liste_Positions ;
 	
 	int i ;
 	int Nombre_Aeroports ;
@@ -38,9 +39,16 @@ int main ( )
 	    cout << endl ;
 	}
 	
+	/*for ( i = 0 ; i < Liste_Positions.size () ; i ++ )
+	{
+		cout << &Liste_Positions[i] << "  " ;
+	    Liste_Positions[i].Afficher () ;
+	    cout << endl ;
+	}*/
+	
 	int Choix = 0 ;
 	
-	/*Nombre_Aeroports = Liste_Aeroports.size() ;
+	Nombre_Aeroports = Liste_Aeroports.size() ;
 	for ( i = 0 ; i < Nombre_Aeroports ; i ++ )
 	    cout << i + 1 << ": " << Liste_Aeroports[i].Get_NameGlob() << endl ;
 	cout << "Choisissez un aeroport en tapant un nombre : " << endl ;
@@ -48,9 +56,9 @@ int main ( )
 	if ( Choix <= 0 || Choix > Nombre_Aeroports )
 	    cout << "Saisie invalide !" << endl ;
 	else
-	    Liste_Aeroports[Choix-1].Afficher_Tout() ;*/
+	    Liste_Aeroports[Choix-1].Afficher_Tout() ;
 	    
-	Nombre_Vols = Liste_Vols.size() ;
+	/*Nombre_Vols = Liste_Vols.size() ;
 	cout << endl ;
 	cout << endl ;
 	for ( i = 0 ; i < Nombre_Vols ; i ++ )
@@ -60,7 +68,7 @@ int main ( )
 	if ( Choix <= 0 || Choix > Nombre_Vols )
 	    cout << "Saisie invalide !" << endl ;
 	else
-	    Liste_Vols[Choix-1].Afficher_Tout() ;
+	    Liste_Vols[Choix-1].Afficher_Tout() ;*/
 	
     return 0 ;
 }

@@ -9,7 +9,7 @@ using namespace std ;
 class Aeroport
 {
 	private :
-	    Position *Adr_Position ;
+	    int ID_Position ;
 	    string NameGlob ;
 	    string NameEn ;
 	    string NameFr ;
@@ -31,15 +31,15 @@ class Aeroport
 		string Get_Country_Name () { return Country_Name ; }
 		string Get_Country_Code () { return Country_Code ; }
 		
-		double Get_Latitude () { return Adr_Position->Get_Latitude() ; }
-		double Get_Longitude () { return Adr_Position->Get_Longitude() ; }
-		double Get_Altitude () { return Adr_Position->Get_Altitude() ; }
+		double Get_Latitude () { return Liste_Positions[ID_Position].Get_Latitude() ; }
+		double Get_Longitude () { return Liste_Positions[ID_Position].Get_Longitude() ; }
+		double Get_Altitude () { return Liste_Positions[ID_Position].Get_Altitude() ; }
 		
 		Aeroport () ;
-		Aeroport ( Position *Pos , string Name_Global , string Name_English , string Name_French , string IATA , string ICAO
+		Aeroport ( int Pos , string Name_Global , string Name_English , string Name_French , string IATA , string ICAO
 		, string Wiki , string Operator_Name , string Country , string CountryCode )
 		{
-		    Adr_Position = Pos ;
+		    ID_Position = Pos ;
 	        NameGlob = Name_Global ;
 	        NameEn = Name_English ;
 	        NameFr = Name_French ;
@@ -50,9 +50,9 @@ class Aeroport
 	        Country_Name = Country ;
 	        Country_Code = CountryCode ;
 		}
-		Aeroport ( Position *Pos , vector<string> Liste_Attributs ) // Attention a l'ordre !
+		Aeroport ( int Pos , vector<string> Liste_Attributs ) // Attention a l'ordre !
 		{
-		    Adr_Position = Pos ;
+		    ID_Position = Pos ;
 		    if ( Liste_Attributs.size() != 9 )
 		    {
 		    	cerr << "Erreur : liste attributs constructeur 'Aeroport' mal dimensionnee" << endl ;
@@ -74,7 +74,7 @@ class Aeroport
 		void Afficher_Tout () {
 			cout << NameGlob << " (" << IATA_Code << "/" << ICAO_Code << ") : "
 			<< Country_Name	<< " / Position " ;
-			Adr_Position->Afficher () ;
+			Liste_Positions[ID_Position].Afficher () ;
 		}
 } ;
 
@@ -90,7 +90,7 @@ int Charger_Liste_Aeroports ( string Nom_Fichier , vector<Aeroport> &A , vector<
     int n ;
     Position p ;
 	int j ;
-	Position *p_Adr ;
+	int p_Adr ;
 	
     stringstream ss ;
     
