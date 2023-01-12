@@ -1,0 +1,22 @@
+# Distributing / packaging
+MANIFEST
+
+# C extensions
+.so
+
+# Markdown documentations and internal materials
+site/
+material/
+
+# Archives, object and temporary files
+*.[oa]
+*~
+
+# Editor-specific files
+.DS_Store
+
+# Images
+*.{png,jpg}
+
+# Executables
+*.exe
