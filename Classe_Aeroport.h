@@ -95,8 +95,6 @@ int Charger_Liste_Aeroports ( string Nom_Fichier , vector<Aeroport> &A , vector<
 	
     stringstream ss ;
     
-    cout << Nom_Fichier << endl ;
-    
     ifstream Fichier ( Nom_Fichier ) ;
 	if ( ! Fichier.is_open() )
 	{

@@ -71,8 +71,6 @@ int Charger_Liste_Vols ( string Nom_Fichier , vector<Vol> &V , vector<Moment> &M
 	
     stringstream ss ;
     
-    cout << Nom_Fichier << endl ;
-    
     ifstream Fichier ( Nom_Fichier ) ;
 	if ( ! Fichier.is_open() )
 	{

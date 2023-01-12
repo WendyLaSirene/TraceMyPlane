@@ -16,6 +16,8 @@ vector<Position> Liste_Positions ;
 vector<Aeroport> Liste_Aeroports ;
 #include "Classe_Vol.h"
 vector<Vol> Liste_Vols ;
+#include "Classe_Utilisateur.h"
+vector<Utilisateur> Liste_Utilisateurs ;
 
 
 
@@ -29,9 +31,46 @@ int main ( )
 	
 	Charger_Liste_Aeroports ( "Airports.csv" , Liste_Aeroports , Liste_Positions ) ;
 	Charger_Liste_Vols ( "Vol.csv" , Liste_Vols , Liste_Moments , Liste_Positions ) ;
+	Charger_Liste_Utilisateurs ( "Users.csv" , Liste_Utilisateurs ) ;
 	
 	
 	// Juste pour tester
+	cout << "Liste des utilisateurs : " << endl ;
+	for ( i = 0 ; i < Liste_Utilisateurs.size () ; i ++ )
+		cout << Liste_Utilisateurs[i].Get_Nom() << endl ;
+	
+	string Saisie ;
+	cout << "Saisir nom d'utilisateur : " ;
+	cin >> Saisie ;
+	
+	for ( i = 0 ; i < Liste_Utilisateurs.size () ; i ++ )
+		if ( Saisie == Liste_Utilisateurs[i].Get_Nom() )
+		    break ;
+	
+	if ( i >= Liste_Utilisateurs.size () )
+	    cout << "L'utilisateur n'existe pas !" << endl ;
+	else
+	{
+	    cout << "Saisir mot de passe : " ;
+	    cin >> Saisie ;
+	    if ( ! Liste_Utilisateurs[i].Check_MDP ( Saisie ) )
+	    {
+		    cout << "Mot de passe incorrect. Saisir mot de passe : " ;
+		    cin >> Saisie ;
+		}
+	    if ( ! Liste_Utilisateurs[i].Check_MDP ( Saisie ) )
+	    {
+		    cout << "Mot de passe incorrect. Saisir mot de passe (dernier essai) : " ;
+		    cin >> Saisie ;
+		}
+		
+		if ( ! Liste_Utilisateurs[i].Check_MDP ( Saisie ) )
+		    cout << "Mot de passe incorrect. Vous avez epuise vos 3 essais. Adieu pauvre idiot !" ;
+		else
+		    cout << "Bienvenue " << Liste_Utilisateurs[i].Get_Nom() << " !" << endl ;
+	}
+	
+	
 	
 	/*for ( i = 0 ; i < Liste_Moments.size () ; i ++ )
 	{
@@ -47,6 +86,7 @@ int main ( )
 	    cout << endl ;
 	}*/
 	
+	/*
 	int Choix = 0 ;
 	
 	Nombre_Aeroports = Liste_Aeroports.size() ;
@@ -70,10 +110,9 @@ int main ( )
 	if ( Choix <= 0 || Choix > Nombre_Vols )
 	    cout << "Saisie invalide !" << endl ;
 	else
-	    Liste_Vols[Choix-1].Afficher_Tout() ;
-	    
-    /*for ( i = 0 ; i < Liste_Vols[Choix-1].Get_Nombre_Etapes() ; i ++ )
-        cout << Liste_Vols[Choix-1].Get_ID_Positions_Vol(i) << endl ;*/
+	    Liste_Vols[Choix-1].Afficher_Tout() ;*/
+	
+	
 	
     return 0 ;
 }
