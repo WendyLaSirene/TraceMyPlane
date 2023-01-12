@@ -16,7 +16,16 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_btn_Connexion_clicked()
 {
-
+  QString name,pswrd;
+  name=ui->lineEdit_Name->text();
+  pswrd=ui->lineEdit_MdP->text();
+if(name==""||pswrd==""){
+    QMessageBox::warning(this,"Warning entry","veuillez entrer votre nom et votre mot de passe");
+    return;
+}
+this->hide();
+Accueil *accueil = new Accueil();
+accueil->show();
 }
 
 

@@ -115,7 +115,11 @@ border-radius: 5px;}</string>
                </widget>
               </item>
               <item>
-               <widget class="QLineEdit" name="lineEdit_MdP"/>
+               <widget class="QLineEdit" name="lineEdit_MdP">
+                <property name="echoMode">
+                 <enum>QLineEdit::Password</enum>
+                </property>
+               </widget>
               </item>
               <item>
                <widget class="QPushButton" name="btn_Connexion">
