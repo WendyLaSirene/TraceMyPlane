@@ -6,10 +6,9 @@
 using namespace std ;
 
 
-class Aeroport
+class Aeroport:Position
 {
 	private :
-	    int ID_Position ;
 	    string NameGlob ;
 	    string NameEn ;
 	    string NameFr ;
@@ -21,7 +20,6 @@ class Aeroport
 	    string Country_Code ;
 	
 	public :
-		int Get_ID_Position () { return ID_Position ; }
 		string Get_NameGlob () { return NameGlob ; }
 		string Get_NameEn () { return NameEn ; }
 		string Get_NameFr () { return NameFr ; }
@@ -31,16 +29,15 @@ class Aeroport
 		string Get_Operator () { return Operator ; }
 		string Get_Country_Name () { return Country_Name ; }
 		string Get_Country_Code () { return Country_Code ; }
+		Position Get_Position_Aeroport() { return Get_Position() ; }
 		
-		double Get_Latitude () { return Liste_Positions[ID_Position].Get_Latitude() ; }
-		double Get_Longitude () { return Liste_Positions[ID_Position].Get_Longitude() ; }
-		double Get_Altitude () { return Liste_Positions[ID_Position].Get_Altitude() ; }
-		
-		Aeroport () ;
-		Aeroport ( int Pos , string Name_Global , string Name_English , string Name_French , string IATA , string ICAO
-		, string Wiki , string Operator_Name , string Country , string CountryCode )
+		Aeroport () { } ;
+		Aeroport ( double Latit , double Longit , double Altit , string Name_Global , string Name_English , string Name_French
+		, string IATA , string ICAO , string Wiki , string Operator_Name , string Country , string CountryCode )
 		{
-		    ID_Position = Pos ;
+		    Latitude = Latit ;
+		    Longitude = Longit ;
+		    Altitude = Altit ;
 	        NameGlob = Name_Global ;
 	        NameEn = Name_English ;
 	        NameFr = Name_French ;
@@ -51,16 +48,18 @@ class Aeroport
 	        Country_Name = Country ;
 	        Country_Code = CountryCode ;
 		}
-		Aeroport ( int Pos , vector<string> Liste_Attributs ) // Attention a l'ordre !
+		Aeroport ( double Latit , double Longit , double Altit , vector<string> Liste_Attributs ) // Attention a l'ordre !
 		{
-		    ID_Position = Pos ;
+			
 		    if ( Liste_Attributs.size() != 9 )
 		    {
 		    	cerr << "Erreur : liste attributs constructeur 'Aeroport' mal dimensionnee" << endl ;
 		    	cerr << "Contient " << Liste_Attributs.size() << " attributs" ;
 			    exit ( 4 ) ;
 			}
-		    
+		    Latitude = Latit ;
+		    Longitude = Longit ;
+		    Altitude = Altit ;
 	        NameGlob = Liste_Attributs[0] ;
 	        NameEn = Liste_Attributs[1] ;
 	        NameFr = Liste_Attributs[2] ;
@@ -75,23 +74,20 @@ class Aeroport
 		void Afficher_Tout () {
 			cout << NameGlob << " (" << IATA_Code << "/" << ICAO_Code << ") : "
 			<< Country_Name	<< " / Position " ;
-			Liste_Positions[ID_Position].Afficher () ;
+			Afficher_Position () ;
 		}
 } ;
 
 
-int Charger_Liste_Aeroports ( string Nom_Fichier , vector<Aeroport> &A , vector<Position> &P )
+int Charger_Liste_Aeroports ( string Nom_Fichier , vector<Aeroport> &A )
 {
     string Contenu ;
     string Ligne ;
     string Mot ;
     vector<string> Ligne_Dissociee ;
-    string Latit , Longit ;
+    string Latit , Longit , Altit ;
     
     int n ;
-    Position p ;
-	int j ;
-	int p_Adr ;
 	
     stringstream ss ;
     
@@ -111,14 +107,10 @@ int Charger_Liste_Aeroports ( string Nom_Fichier , vector<Aeroport> &A , vector<
 	    while ( getline ( ss , Mot , '\t' ) )
 	   	    Ligne_Dissociee.push_back ( Mot ) ;
 	   	    
-        p.Set_Latitude ( stod ( Latit ) ) ;
-        p.Set_Longitude ( stod ( Longit ) ) ;
-        p.Set_Altitude ( stod ( Ligne_Dissociee[9] ) ) ;
-	   	p_Adr = Ajouter_Sans_Doublon ( p , P ) ;
+        Altit = Ligne_Dissociee[9] ;
         Ligne_Dissociee.pop_back () ;
-	   	A.push_back ( Aeroport ( p_Adr , Ligne_Dissociee ) ) ;
-	   	Liste_Positions[p_Adr].Affecter_Aeroport ( A.size() - 1 ) ;
-	   	//A[A.size()-1].Afficher_Tout () ;	cout << endl ;
+	   	A.push_back ( Aeroport ( stod ( Latit ) , stod ( Longit ) , stod ( Altit ) , Ligne_Dissociee ) ) ;
+	   	//A[A.size()-1].Afficher_Tout () ; cout << endl ;
 	   	
         Ligne_Dissociee.clear() ;
 	}

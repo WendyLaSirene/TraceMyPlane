@@ -11,38 +11,65 @@ class Vol
 	private :
 	    int ID ;
 	    string Nom ;
-	    vector<int> ID_Moments_Vol ;
-	    vector<int> ID_Positions_Vol ;
+		vector<Moment> Moments_Etapes ;
+		vector<Position> Positions_Etapes ;
+		Aeroport Aeroport_Depart , Aeroport_Arrivee ;
 	    
 	public :
 		Vol () ;
-		Vol ( int i , string n , int m , int p ) 
+		Vol ( int i , string n , Moment m , Position p ) 
 		{
 	        ID = i ;
 	        Nom = n ;
-	        Add_Moment_Position ( m , p ) ;
+	        Moments_Etapes.push_back ( m ) ;
+			Positions_Etapes.push_back ( p ) ;
 		}
-		void Set_ID ( int i ) { ID = i ; }
-		void Add_Moment_Position ( int m , int p ) { ID_Moments_Vol.push_back ( m ) ; ID_Positions_Vol.push_back ( p ) ; }
-		
-		int Get_ID_Positions_Vol ( int n ) { return ID_Positions_Vol[n] ; }
-		int Get_ID_Moments_Vol ( int n ) { return ID_Moments_Vol[n] ; }
+		Aeroport Get_Aeroport_Depart () { return Aeroport_Depart ; }
+		Aeroport Get_Aeroport_Arrivee () { return Aeroport_Arrivee ; }
+		Moment Get_Moment_Etape ( int n ) { return Moments_Etapes[n] ; }
+		Position Get_Position_Etape ( int n ) { return Positions_Etapes[n] ; }
 		string Get_Nom () { return Nom ; }
-		int Get_Nombre_Etapes () { return ID_Moments_Vol.size() ; }
+		int Get_Nombre_Etapes () { return Moments_Etapes.size() ; }
+		void Add_Moment_Position ( Moment m , Position p ) { Moments_Etapes.push_back ( m ) ; Positions_Etapes.push_back ( p ) ; }
+		
+		void Rechercher_Depart_Arrivee ( vector<Aeroport> &A )
+		{
+		    Position p ;
+		    int i ;
+		    p = Positions_Etapes[0].Get_Position() ;
+		    for ( i = 0 ; i < A.size() ; i ++ )
+		        if ( p == A[i].Get_Position_Aeroport() )
+		        {
+		            Aeroport_Depart = A[i] ;
+		            break ;
+		        }
+		    if ( i == A.size() )
+		        cout << "Probleme : aeroport de depart du vol " << Nom << " introuvable !" << endl ;
+		        
+		    p = Positions_Etapes[Moments_Etapes.size()-1].Get_Position() ;
+		    for ( i = 0 ; i < A.size() ; i ++ )
+		        if ( p == A[i].Get_Position_Aeroport() )
+		        {
+		            Aeroport_Arrivee = A[i] ;
+		            break ;
+		        }
+		    if ( i == A.size() )
+		        cout << "Probleme : aeroport d'arrivee du vol " << Nom << " introuvable !" << endl ;
+		}
+		
 		
 		void Afficher_Etape ( int i )
-		{
+		{	
 		    cout << Nom << " / Heure " ;
-		    Liste_Moments[ID_Moments_Vol[i]].Afficher() ;
+		    Moments_Etapes[i].Afficher_Moment() ;
 			cout << " / Coordonnees : " ;
-			Liste_Positions[ID_Positions_Vol[i]].Afficher() ;
-			if ( Liste_Positions[ID_Positions_Vol[i]].Get_ID_Aeroport() >= 0 )
-			    cout << endl << Liste_Aeroports[ID_Positions_Vol[i]].Get_NameGlob() ;
+		    Positions_Etapes[i].Afficher_Position() ;
 		}
 		
 		void Afficher_Tout ()
 		{
 			int i ;
+			cout << "Vol " << Aeroport_Depart.Get_IATA_Code() << " > " << Aeroport_Arrivee.Get_IATA_Code() << " :" << endl ;
 		    for ( i = 0 ; i < Get_Nombre_Etapes () ; i ++ )
 		    {
 			    Afficher_Etape ( i ) ;
@@ -53,7 +80,7 @@ class Vol
 } ;
 
 
-int Charger_Liste_Vols ( string Nom_Fichier , vector<Vol> &V , vector<Moment> &M , vector<Position> &P )
+int Charger_Liste_Vols ( string Nom_Fichier , vector<Vol> &V , vector<Aeroport> &A )
 {
     string Contenu ;
     string Ligne ;
@@ -66,8 +93,6 @@ int Charger_Liste_Vols ( string Nom_Fichier , vector<Vol> &V , vector<Moment> &M
     Moment m ;
     Position p ;
 	int j ;
-	int m_Adr ;
-	int p_Adr ;
 	
     stringstream ss ;
     
@@ -91,15 +116,12 @@ int Charger_Liste_Vols ( string Nom_Fichier , vector<Vol> &V , vector<Moment> &M
         p.Set_Longitude ( stod ( Ligne_Dissociee[4] ) ) ;
         p.Set_Altitude ( stod ( Ligne_Dissociee[5] ) ) ;
         
-        m_Adr = Ajouter_Sans_Doublon ( m , M ) ;
-		p_Adr = Ajouter_Sans_Doublon ( p , P ) ;
-        //cout << m_Adr << endl ;
-        
         n = Ajouter_Sans_Doublon_String ( Ligne_Dissociee[0] , Liste_Noms_Vols ) ;
+        
         if ( n >= V.size() )
-            V.push_back ( Vol ( n , Ligne_Dissociee[0] , m_Adr , p_Adr ) ) ;
+            V.push_back ( Vol ( n , Ligne_Dissociee[0] , m , p ) ) ;
         else
-		    V[n].Add_Moment_Position ( m_Adr , p_Adr ) ;
+		    V[n].Add_Moment_Position ( m , p ) ;
         
         //cout << V[n].Get_Nombre_Etapes () << "  " ;
 		//V[n].Afficher_Etape ( V[n].Get_Nombre_Etapes () - 1 ) ; cout << endl ;
@@ -107,6 +129,9 @@ int Charger_Liste_Vols ( string Nom_Fichier , vector<Vol> &V , vector<Moment> &M
         
         Ligne_Dissociee.clear() ;
 	}
+	
+	for ( n = 0 ; n < V.size() ; n ++ )
+	    V[n].Rechercher_Depart_Arrivee ( A ) ;
     
     return 0 ;
 }
