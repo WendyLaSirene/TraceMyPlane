@@ -22,7 +22,7 @@ class Utilisateur
 	        Mot_De_Passe = MDP ;
 		}
 		void Set_ID ( int i ) { ID = i ; }
-		void Set_Nom ( int n ) { Nom = n ; }
+		void Set_Nom ( string n ) { Nom = n ; }
 		void Set_MDP ( string MDP ) { Mot_De_Passe = MDP ; }
 		string Get_Nom () { return Nom ; }
 		bool Check_MDP ( string MDP_Candidat ) { return MDP_Candidat == Mot_De_Passe ; }
