@@ -26,6 +26,9 @@ class Vol
 		}
 		Aeroport Get_Aeroport_Depart () { return Aeroport_Depart ; }
 		Aeroport Get_Aeroport_Arrivee () { return Aeroport_Arrivee ; }
+		Moment Get_Moment_Depart () { return Moments_Etapes[0] ; }
+		Moment Get_Moment_Arrivee () { return Moments_Etapes[Moments_Etapes.size()-1] ; }
+		
 		Moment Get_Moment_Etape ( int n ) { return Moments_Etapes[n] ; }
 		Position Get_Position_Etape ( int n ) { return Positions_Etapes[n] ; }
 		string Get_Nom () { return Nom ; }
