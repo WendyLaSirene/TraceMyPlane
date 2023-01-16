@@ -2,4 +2,9 @@
     <qresource prefix="/images">
         <file>Wallpapers_Login.png</file>
     </qresource>
+    <qresource prefix="/sourceClasses">
+        <file>Users.csv</file>
+        <file>Airports.csv</file>
+        <file>Vol.csv</file>
+    </qresource>
 </RCC>
