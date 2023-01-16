@@ -48,7 +48,7 @@ class Aeroport:Position
 	        Country_Name = Country ;
 	        Country_Code = CountryCode ;
 		}
-		Aeroport ( double Latit , double Longit , double Altit , vector<string> Liste_Attributs ) // Attention a l'ordre !
+		Aeroport ( double Latit , double Longit , double Altit , vector<string> Liste_Attributs ) // Attention a l'ordre des Attributs !
 		{
 			
 		    if ( Liste_Attributs.size() != 9 )
@@ -108,8 +108,10 @@ int Charger_Liste_Aeroports ( string Nom_Fichier , vector<Aeroport> &A )
 	   	    Ligne_Dissociee.push_back ( Mot ) ;
 	   	    
         Altit = Ligne_Dissociee[9] ;
-        Ligne_Dissociee.pop_back () ;
+        Ligne_Dissociee.pop_back () ; // On supprime un element pour que le vecteur envoye comme "Attribut" soit de la bonne taille
 	   	A.push_back ( Aeroport ( stod ( Latit ) , stod ( Longit ) , stod ( Altit ) , Ligne_Dissociee ) ) ;
+	   	
+        // 1 ligne d'affichage de debuggage
 	   	//A[A.size()-1].Afficher_Tout () ; cout << endl ;
 	   	
         Ligne_Dissociee.clear() ;

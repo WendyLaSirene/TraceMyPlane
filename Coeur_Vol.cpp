@@ -42,7 +42,7 @@ int main ( )
 	cin >> Saisie ;
 	
 	for ( i = 0 ; i < Liste_Utilisateurs.size () ; i ++ )
-		if ( Saisie == Liste_Utilisateurs[i].Get_Nom() )
+		if ( Saisie == Liste_Utilisateurs[i].Get_Nom() ) // Attention : sensible a la casse !
 		    break ;
 	
 	if ( i >= Liste_Utilisateurs.size () )

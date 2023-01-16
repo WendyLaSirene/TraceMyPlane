@@ -26,6 +26,7 @@ class Utilisateur
 		void Set_MDP ( string MDP ) { Mot_De_Passe = MDP ; }
 		string Get_Nom () { return Nom ; }
 		bool Check_MDP ( string MDP_Candidat ) { return MDP_Candidat == Mot_De_Passe ; }
+		// La fonction "Get_MDP" n'existe pas et c'est normal : on ne veut pas que n'importe qui recupere les mots de passe !
 		
 		void Afficher_Tout () { cout << "ID : / " << ID << " / Nom : " << Nom << " / MDP : " << Mot_De_Passe ; }
 } ;
@@ -39,7 +40,6 @@ int Charger_Liste_Utilisateurs ( string Nom_Fichier , vector<Utilisateur> &U )
     vector<string> Ligne_Dissociee ;
     
     int n ;
-	int id ;
 	
     stringstream ss ;
     
@@ -59,6 +59,7 @@ int Charger_Liste_Utilisateurs ( string Nom_Fichier , vector<Utilisateur> &U )
         
         U.push_back ( Utilisateur ( stoi ( Ligne_Dissociee[2] ) , Ligne_Dissociee[0] , Ligne_Dissociee[1] ) ) ;
         
+        // 1 ligne d'affichage de debuggage
 		//U[U.size()-1].Afficher_Tout () ; cout << endl ;
         
         Ligne_Dissociee.clear() ;

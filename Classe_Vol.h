@@ -36,7 +36,7 @@ class Vol
 		{
 		    Position p ;
 		    int i ;
-		    p = Positions_Etapes[0].Get_Position() ;
+		    p = Positions_Etapes[0].Get_Position() ; // 1ere position du vol
 		    for ( i = 0 ; i < A.size() ; i ++ )
 		        if ( p == A[i].Get_Position_Aeroport() )
 		        {
@@ -46,7 +46,7 @@ class Vol
 		    if ( i == A.size() )
 		        cout << "Probleme : aeroport de depart du vol " << Nom << " introuvable !" << endl ;
 		        
-		    p = Positions_Etapes[Moments_Etapes.size()-1].Get_Position() ;
+		    p = Positions_Etapes[Moments_Etapes.size()-1].Get_Position() ; // Derniere position du vol
 		    for ( i = 0 ; i < A.size() ; i ++ )
 		        if ( p == A[i].Get_Position_Aeroport() )
 		        {
@@ -118,11 +118,12 @@ int Charger_Liste_Vols ( string Nom_Fichier , vector<Vol> &V , vector<Aeroport> 
         
         n = Ajouter_Sans_Doublon_String ( Ligne_Dissociee[0] , Liste_Noms_Vols ) ;
         
-        if ( n >= V.size() )
+        if ( n >= V.size() ) // Le vol a un nom non encore trouve : cree un nouveau
             V.push_back ( Vol ( n , Ligne_Dissociee[0] , m , p ) ) ;
-        else
+        else // Le nom du vol a ete trouve : ajoute les informations audit vol
 		    V[n].Add_Moment_Position ( m , p ) ;
         
+        // 3 lignes d'affichage de debuggage
         //cout << V[n].Get_Nombre_Etapes () << "  " ;
 		//V[n].Afficher_Etape ( V[n].Get_Nombre_Etapes () - 1 ) ; cout << endl ;
 		//V[n].Afficher_Tout () ; cout << endl ;
