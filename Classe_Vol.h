@@ -14,6 +14,8 @@ class Vol
 		vector<Moment> Moments_Etapes ;
 		vector<Position> Positions_Etapes ;
 		Aeroport Aeroport_Depart , Aeroport_Arrivee ;
+		vector<Aeroport> Aeroports_Escale ;
+		vector<Moment> Moments_Escale ;
 	    
 	public :
 		Vol () ;
@@ -29,16 +31,21 @@ class Vol
 		Moment Get_Moment_Depart () { return Moments_Etapes[0] ; }
 		Moment Get_Moment_Arrivee () { return Moments_Etapes[Moments_Etapes.size()-1] ; }
 		
+		Moment Get_Moment_Escale ( int n ) { return Moments_Escale[n] ; }
+		Aeroport Get_Aeroport_Escale ( int n ) { return Aeroports_Escale[n] ; }
+		int Get_Nombre_Escales () { return Moments_Escale.size() ; }
+		
 		Moment Get_Moment_Etape ( int n ) { return Moments_Etapes[n] ; }
 		Position Get_Position_Etape ( int n ) { return Positions_Etapes[n] ; }
-		string Get_Nom () { return Nom ; }
 		int Get_Nombre_Etapes () { return Moments_Etapes.size() ; }
+		
+		string Get_Nom () { return Nom ; }
 		void Add_Moment_Position ( Moment m , Position p ) { Moments_Etapes.push_back ( m ) ; Positions_Etapes.push_back ( p ) ; }
 		
-		void Rechercher_Depart_Arrivee ( vector<Aeroport> &A )
+		void Rechercher_Escales ( vector<Aeroport> &A )
 		{
 		    Position p ;
-		    int i ;
+		    int i , j ;
 		    p = Positions_Etapes[0].Get_Position() ; // 1ere position du vol
 		    for ( i = 0 ; i < A.size() ; i ++ )
 		        if ( p == A[i].Get_Position_Aeroport() )
@@ -56,6 +63,17 @@ class Vol
 		            Aeroport_Arrivee = A[i] ;
 		            break ;
 		        }
+		        
+		    // Positions intermediaires : escales
+		    for ( j = 1 ; j < Moments_Etapes.size() - 1 ; j ++ )
+			    for ( i = 0 ; i < A.size() ; i ++ )
+			        if ( p == A[i].Get_Position_Aeroport() )
+			        {
+			            Aeroports_Escale.push_back ( A[i] ) ;
+			            Moments_Escale.push_back ( Moments_Etapes[j] ) ;
+			            break ;
+			        }
+		    
 		    if ( i == A.size() )
 		        cout << "Probleme : aeroport d'arrivee du vol " << Nom << " introuvable !" << endl ;
 		}
@@ -135,7 +153,7 @@ int Charger_Liste_Vols ( string Nom_Fichier , vector<Vol> &V , vector<Aeroport> 
 	}
 	
 	for ( n = 0 ; n < V.size() ; n ++ )
-	    V[n].Rechercher_Depart_Arrivee ( A ) ;
+	    V[n].Rechercher_Escales ( A ) ;
     
     return 0 ;
 }
