@@ -11,15 +11,24 @@ CONFIG += c++17
 SOURCES += \
     accueil.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    widg_airports.cpp \
+    widg_entete.cpp \
+    widg_vols.cpp
 
 HEADERS += \
     accueil.h \
-    mainwindow.h
+    mainwindow.h \
+    widg_airports.h \
+    widg_entete.h \
+    widg_vols.h
 
 FORMS += \
     accueil.ui \
-    mainwindow.ui
+    mainwindow.ui \
+    widg_airports.ui \
+    widg_entete.ui \
+    widg_vols.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
