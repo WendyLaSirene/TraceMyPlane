@@ -1,4 +1,6 @@
 #include <string>
+#ifndef CLASSE_MOMENT_H
+#define CLASSE_MOMENT_H
 using namespace std ;
 
 
@@ -17,8 +19,9 @@ class Moment
 		int Get_Heure () { return Heure ; }
 		int Get_Minute () { return Minute ; }
 		
-		void Afficher_Moment () { cout << Heure << ":" << Minute ; }
+        //void Afficher_Moment () { cout << Heure << ":" << Minute ; }
 		
 	bool operator== ( Moment m ) const
 	{ return ( Heure == m.Heure && Minute == m.Minute ) ; }
 } ;
+#endif

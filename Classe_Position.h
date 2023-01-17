@@ -1,4 +1,6 @@
 #include <string>
+#ifndef CLASSE_POSITION_H
+#define CLASSE_POSITION_H
 using namespace std ;
 
 
@@ -22,9 +24,10 @@ class Position
 		double Get_Altitude () { return Altitude ; }
 		
 		
-		void Afficher_Position () { cout << abs ( Latitude ) << ( Latitude >= 0 ? "N, " : "S, " )
-		<< abs ( Longitude ) << ( Longitude >= 0 ? "E, " : "W, " ) << Altitude << "m" ; }
+        //void Afficher_Position () { cout << abs ( Latitude ) << ( Latitude >= 0 ? "N, " : "S, " )
+        //<< abs ( Longitude ) << ( Longitude >= 0 ? "E, " : "W, " ) << Altitude << "m" ; }
 		
 	bool operator== ( Position p ) const
 	{ return ( Latitude == p.Latitude && Longitude == p.Longitude && Altitude == p.Altitude ) ; }
 } ;
+#endif

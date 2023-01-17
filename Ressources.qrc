@@ -7,4 +7,15 @@
         <file>Airports.csv</file>
         <file>Vol.csv</file>
     </qresource>
+    <qresource prefix="/icon"/>
+    <qresource prefix="/icons">
+        <file>airport.png</file>
+        <file>airport_Token.png</file>
+        <file>bouton-darret.png</file>
+        <file>bouton-de-rembobinage.png</file>
+        <file>bouton-jouer.png</file>
+        <file>bouton-pause.png</file>
+        <file>plane.png</file>
+        <file>plane_Token.png</file>
+    </qresource>
 </RCC>

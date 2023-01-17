@@ -1,3 +1,6 @@
+#include <QString>
+#include <vector>
+
 template <typename T>
 int Ajouter_Sans_Doublon ( const T element , vector<T> &V )
 {
@@ -15,7 +18,7 @@ int Ajouter_Sans_Doublon ( const T element , vector<T> &V )
 }
 
 
-int Ajouter_Sans_Doublon_String ( const string element , vector<string> &V )
+int Ajouter_Sans_Doublon_String ( const QString element , vector<QString> &V )
 {
     int i ;
     int Taille = V.size() ;

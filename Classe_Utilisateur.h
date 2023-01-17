@@ -42,7 +42,7 @@ bool Charger_Liste_Utilisateurs ( QString Nom_Fichier , vector<Utilisateur> &U )
     vector<string> Ligne_Dissociee ;*/
 
     QString line;
-    QStringList line_Separed;
+    QStringList line_Splited;
     bool okToInt;
 	
     QFile file(Nom_Fichier);
@@ -53,8 +53,8 @@ bool Charger_Liste_Utilisateurs ( QString Nom_Fichier , vector<Utilisateur> &U )
         in.readLine();// 1ere ligne est a jeter : en-tete
         while (!in.atEnd()) {
             line = in.readLine();
-            line_Separed = line.split(',');
-            U.push_back(Utilisateur(line_Separed[2].toInt(&okToInt,10),line_Separed[0],line_Separed[1]));
+            line_Splited = line.split(',');
+            U.push_back(Utilisateur(line_Splited[2].toInt(&okToInt,10),line_Splited[0],line_Splited[1]));
         }
         return true;
 

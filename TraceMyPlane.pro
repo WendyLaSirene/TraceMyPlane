@@ -21,6 +21,12 @@ HEADERS += \
     mainwindow.h \
     widg_airports.h \
     widg_entete.h \
+    Classe_Aeroport.h\
+    Classe_Moment.h\
+    Classe_Position.h\
+    Classe_Utilisateur.h\
+    Classe_Vol.h\
+    Fonctions_Diverses.h\
     widg_vols.h
 
 FORMS += \

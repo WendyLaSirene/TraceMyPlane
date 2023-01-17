@@ -3,52 +3,58 @@
 #include <fstream>
 #include <vector>
 #include <sstream>
+#include <QString>
+#include <QFile>
+#include <QTextStream>
+#include "Classe_Position.h"
+#ifndef CLASSE_AEROPORT_H
+#define CLASSE_AEROPORT_H
 using namespace std ;
 
 
 class Aeroport:Position
 {
 	private :
-	    string NameGlob ;
-	    string NameEn ;
-	    string NameFr ;
-	    string IATA_Code ;
-	    string ICAO_Code ;
-	    string Wiki_Data ;
-	    string Operator ;
-	    string Country_Name ;
-	    string Country_Code ;
+        QString NameGlob ;
+        QString NameEn ;
+        QString NameFr ;
+        QString IATA_Code ;
+        QString ICAO_Code ;
+        QString Wiki_Data ;
+        QString Operator ;
+        QString Country_Name ;
+        QString Country_Code ;
 	
 	public :
-		string Get_NameGlob () { return NameGlob ; }
-		string Get_NameEn () { return NameEn ; }
-		string Get_NameFr () { return NameFr ; }
-		string Get_IATA_Code () { return IATA_Code ; }
-		string Get_ICAO_Code () { return ICAO_Code ; }
-		string Get_Wiki_Data () { return Wiki_Data ; }
-		string Get_Operator () { return Operator ; }
-		string Get_Country_Name () { return Country_Name ; }
-		string Get_Country_Code () { return Country_Code ; }
-		Position Get_Position_Aeroport() { return Get_Position() ; }
+        QString Get_NameGlob () { return NameGlob ; }
+        QString Get_NameEn () { return NameEn ; }
+        QString Get_NameFr () { return NameFr ; }
+        QString Get_IATA_Code () { return IATA_Code ; }
+        QString Get_ICAO_Code () { return ICAO_Code ; }
+        QString Get_Wiki_Data () { return Wiki_Data ; }
+        QString Get_Operator () { return Operator ; }
+        QString Get_Country_Name () { return Country_Name ; }
+        QString Get_Country_Code () { return Country_Code ; }
+        Position Get_Position_Aeroport() { return Get_Position() ; }
 		
 		Aeroport () { } ;
-		Aeroport ( double Latit , double Longit , double Altit , string Name_Global , string Name_English , string Name_French
-		, string IATA , string ICAO , string Wiki , string Operator_Name , string Country , string CountryCode )
+        Aeroport ( double Latit , double Longit , double Altit , QString Name_Global , QString Name_English , QString Name_French
+        , QString IATA , QString ICAO , QString Wiki , QString Operator_Name , QString Country , QString CountryCode )
 		{
-		    Latitude = Latit ;
-		    Longitude = Longit ;
-		    Altitude = Altit ;
+            Latitude = Latit ;
+            Longitude = Longit ;
+            Altitude = Altit ;
 	        NameGlob = Name_Global ;
 	        NameEn = Name_English ;
 	        NameFr = Name_French ;
 	        IATA_Code = IATA ;
 	        ICAO_Code = ICAO ;
-	        Wiki_Data = Wiki ;
+            Wiki_Data = Wiki ;
 	        Operator = Operator_Name ;
 	        Country_Name = Country ;
 	        Country_Code = CountryCode ;
 		}
-		Aeroport ( double Latit , double Longit , double Altit , vector<string> Liste_Attributs ) // Attention a l'ordre des Attributs !
+        Aeroport ( double Latit , double Longit , double Altit , vector<QString> Liste_Attributs ) // Attention a l'ordre des Attributs !
 		{
 			
 		    if ( Liste_Attributs.size() != 9 )
@@ -57,9 +63,9 @@ class Aeroport:Position
 		    	cerr << "Contient " << Liste_Attributs.size() << " attributs" ;
 			    exit ( 4 ) ;
 			}
-		    Latitude = Latit ;
-		    Longitude = Longit ;
-		    Altitude = Altit ;
+            Latitude = Latit ;
+            Longitude = Longit ;
+            Altitude = Altit ;
 	        NameGlob = Liste_Attributs[0] ;
 	        NameEn = Liste_Attributs[1] ;
 	        NameFr = Liste_Attributs[2] ;
@@ -71,29 +77,47 @@ class Aeroport:Position
 	        Country_Code = Liste_Attributs[8] ;
 		}
 		
-		void Afficher_Tout () {
+        /*void Afficher_Tout () {
 			cout << NameGlob << " (" << IATA_Code << "/" << ICAO_Code << ") : "
 			<< Country_Name	<< " / Position " ;
-			Afficher_Position () ;
-		}
+            //Afficher_Position () ;
+        }*/
 } ;
 
 
-int Charger_Liste_Aeroports ( string Nom_Fichier , vector<Aeroport> &A )
+bool Charger_Liste_Aeroports ( QString Nom_Fichier , vector<Aeroport> &A )
 {
-    string Contenu ;
+    QString line;
+    QStringList line_splited;
+    bool okToInt;
+
+    QFile file(Nom_Fichier);
+    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
+        return false;
+
+    QTextStream in(&file);
+    in.readLine();// 1ere ligne est a jeter : en-tete
+    while (!in.atEnd()) {
+        line = in.readLine();
+        line_splited = line.split(',');
+        A.push_back(Aeroport(line_splited[0].toInt(&okToInt,10),line_splited[1].toInt(&okToInt,10),line_splited[11].toInt(&okToInt,10),
+                line_splited[2],line_splited[3],line_splited[4],line_splited[5],line_splited[6],line_splited[7],line_splited[8],line_splited[9],line_splited[10]));
+    }
+    return true;
+
+    /*string Contenu ;
     string Ligne ;
     string Mot ;
     vector<string> Ligne_Dissociee ;
     string Latit , Longit , Altit ;
     
-    int n ;
+    //int n ;
 	
     stringstream ss ;
     
     ifstream Fichier ( Nom_Fichier ) ;
 	if ( ! Fichier.is_open() )
-	{
+    {
         cerr << "Erreur : fichier '" << Nom_Fichier << "'" << endl;
         exit ( EXIT_FAILURE ) ;
     }
@@ -117,5 +141,7 @@ int Charger_Liste_Aeroports ( string Nom_Fichier , vector<Aeroport> &A )
         Ligne_Dissociee.clear() ;
 	}
     
-    return 0 ;
+    return 0 ;*/
 }
+
+#endif
