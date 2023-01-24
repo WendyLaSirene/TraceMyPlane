@@ -1,1 +1,23 @@
+# Distributing / packaging
+MANIFEST
+
+# C extensions
+.so
+
+# Markdown documentations, build and internal materials
+site/
+material/
+build/
+
+# Archives, object and temporary files
+*.[oa]
+*~
+
+# Editor-specific files
+.DS_Store
+
+# Non-final documents
+*.odt
+
+# defined by Wendy??
 *.user
