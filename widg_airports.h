@@ -13,6 +13,7 @@ class Widg_Airports : public QWidget
 
 public:
     explicit Widg_Airports(QWidget *parent = nullptr);
+    void set_Name(QString);
     ~Widg_Airports();
 
 private:

@@ -12,3 +12,11 @@ widg_Vols::~widg_Vols()
 {
     delete ui;
 }
+
+void widg_Vols::setFlyName(QString flyName){
+    ui->lab_flyName->setText(flyName);
+}
+
+void widg_Vols::setStartEnd(QString start,QString end){
+    ui->lab_AirportStartEnd->setText(start+" - "+end);
+}

@@ -12,3 +12,11 @@ Widg_Entete::~Widg_Entete()
 {
     delete ui;
 }
+
+void Widg_Entete::setTitle(QString title){
+    ui->lab_NameTete->setText(title);
+}
+
+void Widg_Entete::setIcon(QString icon){
+    ui->wid_Icon->setStyleSheet("border-image: url("+icon+")");
+}

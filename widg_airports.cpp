@@ -12,3 +12,7 @@ Widg_Airports::~Widg_Airports()
 {
     delete ui;
 }
+
+void Widg_Airports::set_Name(QString name){
+    ui->lab_NameG->setText(name);
+}

@@ -13,6 +13,8 @@ class Widg_Entete : public QWidget
 
 public:
     explicit Widg_Entete(QWidget *parent = nullptr);
+    void setTitle(QString);
+    void setIcon(QString);
     ~Widg_Entete();
 
 private:

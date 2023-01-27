@@ -89,6 +89,7 @@ bool Charger_Liste_Aeroports ( QString Nom_Fichier , vector<Aeroport> &A )
 {
     QString line;
     QStringList line_splited;
+    QStringList coordSplited;
     bool okToInt;
 
     QFile file(Nom_Fichier);
@@ -99,9 +100,10 @@ bool Charger_Liste_Aeroports ( QString Nom_Fichier , vector<Aeroport> &A )
     in.readLine();// 1ere ligne est a jeter : en-tete
     while (!in.atEnd()) {
         line = in.readLine();
-        line_splited = line.split(',');
-        A.push_back(Aeroport(line_splited[0].toInt(&okToInt,10),line_splited[1].toInt(&okToInt,10),line_splited[11].toInt(&okToInt,10),
-                line_splited[2],line_splited[3],line_splited[4],line_splited[5],line_splited[6],line_splited[7],line_splited[8],line_splited[9],line_splited[10]));
+        line_splited = line.split('\t');
+        coordSplited = line_splited[0].split(",");
+        A.push_back(Aeroport(coordSplited[0].toInt(&okToInt,10),coordSplited[1].toInt(&okToInt,10),line_splited[10].toInt(&okToInt,10),
+                line_splited[1],line_splited[2],line_splited[3],line_splited[4],line_splited[5],line_splited[6],line_splited[7],line_splited[8],line_splited[9]));
     }
     return true;
 
@@ -142,6 +144,14 @@ bool Charger_Liste_Aeroports ( QString Nom_Fichier , vector<Aeroport> &A )
 	}
     
     return 0 ;*/
+}
+
+QString filtre_Aeroport_gName(QString nameToFiltre){
+    nameToFiltre.remove(0,9);
+    if(nameToFiltre.section(" ",0,0)=="de"){
+        nameToFiltre.remove(0,3);
+    }
+    return nameToFiltre;
 }
 
 #endif

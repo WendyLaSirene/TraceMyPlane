@@ -9,6 +9,7 @@
 //#include "Classe_Position.h"
 #include "Classe_Moment.h"
 #include "Classe_Aeroport.h"
+#include "Fonctions_Diverses.h"
 #ifndef CLASSE_VOL_H
 #define CLASSE_VOL_H
 
@@ -115,6 +116,10 @@ bool Charger_Liste_Vols ( QString Nom_Fichier , vector<Vol> &V , vector<Aeroport
     QString line,flyName;
     QStringList line_Splited;
     bool okToInt;
+    Moment moment;
+    Position position;
+    int nbrOfFly;
+    vector<QString> listNomVols;
 
     QFile file(Nom_Fichier);
         if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
@@ -126,13 +131,20 @@ bool Charger_Liste_Vols ( QString Nom_Fichier , vector<Vol> &V , vector<Aeroport
             line = in.readLine();
             line_Splited = line.split(',');
             if(line_Splited.size()==6){ //filtre les lignes de de donnés inutilisables
-                if(flyName!=line_Splited[0]){
-                    flyName=line_Splited[0];
+                moment.Set_Heure(line_Splited[1].toInt(&okToInt,10));
+                moment.Set_Minute(line_Splited[2].toInt(&okToInt,10));
+                position.Set_Latitude(line_Splited[3].toInt(&okToInt,10));
+                position.Set_Longitude(line_Splited[4].toInt(&okToInt,10));
+                position.Set_Altitude(line_Splited[1].toInt(&okToInt,10));
 
-                }
+                nbrOfFly=Ajouter_Sans_Doublon_String(line_Splited[0],listNomVols);
+
+                if(nbrOfFly>=V.size()){V.push_back(Vol(nbrOfFly,line_Splited[0],moment,position));}
+                else{V[nbrOfFly].Add_Moment_Position ( moment , position ) ;}
             }
         }
         return true;
+
     /*string Contenu ;
     string Ligne ;
     string Mot ;

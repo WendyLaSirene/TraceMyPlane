@@ -13,6 +13,8 @@ class widg_Vols : public QWidget
 
 public:
     explicit widg_Vols(QWidget *parent = nullptr);
+    void setFlyName(QString);
+    void setStartEnd(QString,QString);
     ~widg_Vols();
 
 private:
