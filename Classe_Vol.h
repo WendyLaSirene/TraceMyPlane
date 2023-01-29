@@ -28,7 +28,7 @@ class Vol
 		vector<Moment> Moments_Escale ;
 	    
 	public :
-		Vol () ;
+        Vol () {};
         Vol ( int i , QString n , Moment m , Position p )
 		{
 	        ID = i ;
@@ -36,6 +36,7 @@ class Vol
 	        Moments_Etapes.push_back ( m ) ;
 			Positions_Etapes.push_back ( p ) ;
 		}
+        int get_VolId(){return ID;}
 		Aeroport Get_Aeroport_Depart () { return Aeroport_Depart ; }
 		Aeroport Get_Aeroport_Arrivee () { return Aeroport_Arrivee ; }
 		Moment Get_Moment_Depart () { return Moments_Etapes[0] ; }
