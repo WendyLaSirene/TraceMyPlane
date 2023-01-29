@@ -18,5 +18,5 @@ void Head_Interract_Fly::setName(QString name){
 }
 
 void Head_Interract_Fly::setTrajet(QString start,QString end){
-    ui->lab_trajet->setText(start+"-"+end);
+    ui->lab_trajet->setText(start+" -> "+end);
 }

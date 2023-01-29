@@ -102,7 +102,7 @@ bool Charger_Liste_Aeroports ( QString Nom_Fichier , vector<Aeroport> &A )
         line = in.readLine();
         line_splited = line.split('\t');
         coordSplited = line_splited[0].split(",");
-        A.push_back(Aeroport(coordSplited[0].toInt(&okToInt,10),coordSplited[1].toInt(&okToInt,10),line_splited[10].toInt(&okToInt,10),
+        A.push_back(Aeroport(coordSplited[0].toFloat(&okToInt),coordSplited[1].toFloat(&okToInt),line_splited[10].toInt(&okToInt,10),
                 line_splited[1],line_splited[2],line_splited[3],line_splited[4],line_splited[5],line_splited[6],line_splited[7],line_splited[8],line_splited[9]));
     }
     return true;

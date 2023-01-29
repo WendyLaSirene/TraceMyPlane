@@ -131,18 +131,21 @@ bool Charger_Liste_Vols ( QString Nom_Fichier , vector<Vol> &V , vector<Aeroport
         while (!in.atEnd()) {
             line = in.readLine();
             line_Splited = line.split(',');
-            if(line_Splited.size()==6){ //filtre les lignes de de donnés inutilisables
+            if(line_Splited[0]!=""){ //filtre les lignes de de donnés inutilisables
                 moment.Set_Heure(line_Splited[1].toInt(&okToInt,10));
                 moment.Set_Minute(line_Splited[2].toInt(&okToInt,10));
-                position.Set_Latitude(line_Splited[3].toInt(&okToInt,10));
-                position.Set_Longitude(line_Splited[4].toInt(&okToInt,10));
-                position.Set_Altitude(line_Splited[1].toInt(&okToInt,10));
+                position.Set_Latitude(line_Splited[4].toFloat(&okToInt));
+                position.Set_Longitude(line_Splited[3].toFloat(&okToInt));
+                position.Set_Altitude(line_Splited[5].toFloat(&okToInt));
 
                 nbrOfFly=Ajouter_Sans_Doublon_String(line_Splited[0],listNomVols);
 
                 if(nbrOfFly>=V.size()){V.push_back(Vol(nbrOfFly,line_Splited[0],moment,position));}
                 else{V[nbrOfFly].Add_Moment_Position ( moment , position ) ;}
             }
+        }
+        for ( nbrOfFly = 0 ; nbrOfFly < V.size() ; nbrOfFly ++ ){
+            V[nbrOfFly].Rechercher_Escales ( A ) ;
         }
         return true;
 
