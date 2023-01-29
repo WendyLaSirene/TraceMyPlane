@@ -35,6 +35,7 @@ Accueil::Accueil(QWidget *parent) :
             auto listAirports = new QListWidgetItem();
             listAirports->setSizeHint(widgAirport->minimumSize());
 
+            //retire "Aeroport de " du nom d'aeroport car redondant
             gName=filtre_Aeroport_gName(airport.Get_NameGlob());
             widgAirport->set_Name(gName);
             ui->list_VolAero->addItem(listAirports);
@@ -62,6 +63,7 @@ Accueil::Accueil(QWidget *parent) :
             QString airportStart,airportEnd;
 
             listFly->setSizeHint(widgFly->minimumSize());
+            //retire "Aeroport de " du nom d'aeroport car redondant
             airportStart=filtre_Aeroport_gName(vol.Get_Aeroport_Depart().Get_NameGlob());
             airportEnd=filtre_Aeroport_gName(vol.Get_Aeroport_Arrivee().Get_NameGlob());
             widgFly->setFlyName(vol.Get_Nom());

@@ -10,6 +10,8 @@ CONFIG += c++17
 
 SOURCES += \
     accueil.cpp \
+    head_interact_airport.cpp \
+    head_interract_fly.cpp \
     main.cpp \
     mainwindow.cpp \
     widg_airports.cpp \
@@ -18,6 +20,8 @@ SOURCES += \
 
 HEADERS += \
     accueil.h \
+    head_interact_airport.h \
+    head_interract_fly.h \
     mainwindow.h \
     widg_airports.h \
     widg_entete.h \
@@ -31,6 +35,8 @@ HEADERS += \
 
 FORMS += \
     accueil.ui \
+    head_interact_airport.ui \
+    head_interract_fly.ui \
     mainwindow.ui \
     widg_airports.ui \
     widg_entete.ui \

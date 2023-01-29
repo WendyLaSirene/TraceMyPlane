@@ -11,56 +11,52 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>TraceMyPlane</string>
   </property>
   <property name="styleSheet">
    <string notr="true">#Accueil{background-color: rgb(170, 255, 255);}</string>
   </property>
-  <widget class="QWidget" name="verticalWidget" native="true">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1001</width>
-     <height>671</height>
-    </rect>
-   </property>
-   <layout class="QVBoxLayout" name="verticalLayout" stretch="80,20">
-    <item>
-     <layout class="QHBoxLayout" name="horizontalLayout" stretch="20,80">
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QWidget" name="verticalWidget" native="true">
+     <layout class="QVBoxLayout" name="verticalLayout" stretch="80,20">
       <item>
-       <widget class="QListWidget" name="list_VolAero">
-        <property name="minimumSize">
-         <size>
-          <width>400</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>400</width>
-          <height>16777215</height>
-         </size>
-        </property>
-       </widget>
+       <layout class="QHBoxLayout" name="horizontalLayout" stretch="20,80">
+        <item>
+         <widget class="QListWidget" name="list_VolAero">
+          <property name="minimumSize">
+           <size>
+            <width>400</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>400</width>
+            <height>16777215</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QWidget" name="widget_Map" native="true"/>
+        </item>
+       </layout>
       </item>
       <item>
-       <widget class="QWidget" name="widget_Map" native="true"/>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="50,50">
-      <item>
-       <widget class="QListWidget" name="list_Interact"/>
-      </item>
-      <item>
-       <widget class="QWidget" name="widget_CPURAM" native="true"/>
+       <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="50,50">
+        <item>
+         <widget class="QListWidget" name="list_Interact"/>
+        </item>
+        <item>
+         <widget class="QWidget" name="widget_CPURAM" native="true"/>
+        </item>
+       </layout>
       </item>
      </layout>
-    </item>
-   </layout>
-  </widget>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>
