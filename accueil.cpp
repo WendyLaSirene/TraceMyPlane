@@ -89,6 +89,7 @@ Accueil::~Accueil(){
     delete ui;
 }
 
+//affiche les interractions lors de la selection
 void Accueil::on_list_VolAero_itemClicked(QListWidgetItem *item)
 {
     //récupère et nétoie le type du tooltype
@@ -133,7 +134,7 @@ void Accueil::on_list_VolAero_itemClicked(QListWidgetItem *item)
         auto widgHeadInterract = new Head_Interract_Fly;
 
         widgHeadInterract->setName(vol.Get_Nom());
-        widgHeadInterract->setTrajet(vol.Get_Aeroport_Depart().Get_NameGlob(),vol.Get_Aeroport_Arrivee().Get_NameGlob());
+        widgHeadInterract->setTrajet(vol.Get_Aeroport_Depart().Get_NameGlob(),vol.Get_Moment_Depart(),vol.Get_Aeroport_Arrivee().Get_NameGlob(),vol.Get_Moment_Arrivee());
         listHeadItem->setSizeHint(widgHeadInterract->minimumSize());
 
         ui->list_Interact->addItem(listHeadItem);
