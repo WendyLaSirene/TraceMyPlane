@@ -55,11 +55,11 @@ class Vol
 		
 		void Rechercher_Escales ( vector<Aeroport> &A )
 		{
-		    Position p ;
+            Position p ;
 		    int i , j ;
-		    p = Positions_Etapes[0].Get_Position() ; // 1ere position du vol
+            p = Positions_Etapes[0].Get_Position() ; // 1ere position du vol
 		    for ( i = 0 ; i < A.size() ; i ++ )
-		        if ( p == A[i].Get_Position_Aeroport() )
+                if ( Positions_Etapes[0].Get_Position() == A[i].Get_Position_Aeroport() )
 		        {
 		            Aeroport_Depart = A[i] ;
 		            break ;
@@ -67,18 +67,20 @@ class Vol
 		    if ( i == A.size() )
                 //cout << "Probleme : aeroport de depart du vol " << Nom << " introuvable !" << endl ;
 		        
-		    p = Positions_Etapes[Moments_Etapes.size()-1].Get_Position() ; // Derniere position du vol
-		    for ( i = 0 ; i < A.size() ; i ++ )
-		        if ( p == A[i].Get_Position_Aeroport() )
+                //Moments_Etapes.size()-1
+            p = Positions_Etapes[Positions_Etapes.size()-1].Get_Position() ; // Derniere position du vol
+            for ( i = 0 ; i < A.size()-1  ; i ++ )
+                if ( Positions_Etapes[Positions_Etapes.size()-1].Get_Position() == A[i].Get_Position_Aeroport() )
 		        {
 		            Aeroport_Arrivee = A[i] ;
 		            break ;
-		        }
+                }
 		        
 		    // Positions intermediaires : escales
 		    for ( j = 1 ; j < Moments_Etapes.size() - 1 ; j ++ )
+                p=Positions_Etapes[j];
 			    for ( i = 0 ; i < A.size() ; i ++ )
-			        if ( p == A[i].Get_Position_Aeroport() )
+                    if ( p == A[i].Get_Position_Aeroport() )
 			        {
 			            Aeroports_Escale.push_back ( A[i] ) ;
 			            Moments_Escale.push_back ( Moments_Etapes[j] ) ;
